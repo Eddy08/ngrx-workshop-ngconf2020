@@ -1,23 +1,31 @@
 import { createAction, props } from "@ngrx/store";
 import { BookRequiredProps } from "src/app/shared/models";
 
-//[Book Page] Create a Book
+//[Books Page] Create Book
 // - BookRequiredProps
-const createBook = createAction("[Book Page] Create a Book",
+export const enter = createAction("[Books Page] Enter");
+
+export const selectBook = createAction("[Books Page] Select Book",
+props<{bookId: string}>());
+
+export const clearSelectedBook = createAction("[Books Page] Clear Selected Book");
+
+export const createBook = createAction("[Books Page] Create Book",
 props<{book:BookRequiredProps}>()
 );
-//[Book Page] Update a Book
+//[Books Page] Update Book
 // - BookRequiredProps
 // - ID
-const updateBook = createAction("[Book Page] Update a Book",
-props<{book:BookRequiredProps,ID:string}>()
+export const updateBook = createAction("[Books Page] Update Book",
+props<{changes:BookRequiredProps;bookId: string}>()
 )
 
-//[Book Page] Delete a Book
+//[Books Page] Delete Book
 // - ID
-const deleteBook = createAction("[Book Page] Delete a Book",
-props<{ID:string}>()
+export const deleteBook = createAction("[Books Page] Delete Book",
+props<{bookId: string}>()
 )
-//[Book Page] Cancel Editing a Book
+//[Books Page] Cancel Editing Book
 // - ID
-const editBook = createAction("[Book Page] Cancel Editing a Book")
+// Same as Clear Edit Book
+// export const editBook = createAction("[Books Page] Cancel Editing Book")
