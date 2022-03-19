@@ -1,27 +1,15 @@
 {
   "books": [
     {
-      "id": "95e8065d-14de-40f3-86ab-9fbe17e581c3",
-      "name": "Third",
-      "earnings": "3",
-      "description": ""
-    },
-    {
       "id": "6fd5acb0-9a3c-44f6-ab65-47656e12c3cb",
-      "name": "ab",
+      "name": "first book",
       "earnings": "88",
       "description": null
     },
     {
-      "id": "52b8a6dc-7481-47a7-b473-44cf1d134524",
-      "name": "second",
-      "earnings": "2",
-      "description": "Second"
-    },
-    {
-      "id": "f71fea7a-cde5-428d-b698-3cb4977f8626",
-      "name": "forMe",
-      "earnings": "111",
+      "id": "935e1881-735d-4712-a907-7aaf1438edc0",
+      "name": "new book",
+      "earnings": "3",
       "description": null
     }
   ]

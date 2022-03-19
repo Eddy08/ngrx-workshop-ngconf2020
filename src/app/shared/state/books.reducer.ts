@@ -32,7 +32,31 @@ export const booksReducer=createReducer(
     on(BooksPageActions.selectBook,(state,action)=>{
         return {
             ...state,
-            activateBookId:action.bookId
+            activeBookId:action.bookId
+        }
+    }),
+    on(BooksApiActions.booksLoaded,(state,action)=>{
+        return {
+            ...state,
+            collection:action.books
+        }
+    }),
+    on(BooksApiActions.bookDeleted,(state,action)=>{
+        return {
+            ...state,
+            collection:deleteBook(state.collection,action.bookId)
+        }
+    }),
+    on(BooksApiActions.bookCreated,(state,action)=>{
+        return {
+            ...state,
+            collection:createBook(state.collection,action.book)
+        }
+    }),
+    on(BooksApiActions.bookUpdated,(state,action)=>{
+        return {
+            ...state,
+            collection:updateBook(state.collection,action.book)
         }
     })
 )
@@ -40,4 +64,32 @@ export const booksReducer=createReducer(
 export function reducer(state:undefined | State, action:Action){
     return booksReducer(state,action)
 }
+// getter just pulling properties 
+export const selectAll=(state:State) =>state.collection;
+export const selectActiveBookId=(state:State)=> state.activeBookId;
 
+// complex
+export const selectActiveBook_unoptimized = (state:State)=>{
+    const books=selectAll(state);
+    const activeBookId=selectActiveBookId(state);
+
+    //computation
+    return books.find(book=>book.id===activeBookId)
+}
+// upto 8 functions inside here
+export const selectActiveBook = createSelector(
+    selectAll,
+    selectActiveBookId,
+    (books,activeBookId)=>{
+        return books.find(book=> book.id===activeBookId);
+    }
+)
+
+export const selectEarningsTotals_unoptimized = (state: State)=>{
+    const books=selectAll(state);
+    return calculateBooksGrossEarnings(books);
+}
+export const selectEarningsTotals=createSelector(
+    selectAll,
+   calculateBooksGrossEarnings
+)
