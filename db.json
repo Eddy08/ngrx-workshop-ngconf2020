@@ -11,6 +11,12 @@
       "name": "new book",
       "earnings": "3",
       "description": null
+    },
+    {
+      "id": "a26cb0a5-0de1-40ca-8155-a7ac3b0db61c",
+      "name": "abc",
+      "earnings": "3999",
+      "description": "value"
     }
   ]
 }
