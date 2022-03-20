@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import {State,selectBooksEarningsTotals} from "src/app/shared/state";
 import {
   BookModel,
   calculateBooksGrossEarnings,
@@ -16,8 +18,10 @@ export class BooksPageComponent implements OnInit {
   books: BookModel[] = [];
   currentBook: BookModel | null = null;
   total: number = 0;
-
-  constructor(private booksService: BooksService,private store:Store) {}
+  total$:Observable<number>;
+  constructor(private booksService: BooksService,private store:Store) {
+    this.total$=store.select(selectBooksEarningsTotals);
+  }
 
   ngOnInit() {
     this.store.dispatch(BooksPageActions.enter()) 
