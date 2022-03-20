@@ -9,6 +9,7 @@ import {
 } from "src/app/shared/models";
 import { BooksService } from "src/app/shared/services";
 import {BooksPageActions,BooksApiActions} from "../../actions"
+import { selectEarningsTotals } from "src/app/shared/state/books.reducer";
 @Component({
   selector: "app-books",
   templateUrl: "./books-page.component.html",
@@ -19,7 +20,7 @@ export class BooksPageComponent implements OnInit {
   currentBook: BookModel | null = null;
   total: number = 0;
   total$:Observable<number>;
-  constructor(private booksService: BooksService,private store:Store) {
+  constructor(private booksService: BooksService,private store:Store<State>) {
     this.total$=store.select(selectBooksEarningsTotals);
   }
 
