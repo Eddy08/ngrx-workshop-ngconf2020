@@ -21,7 +21,7 @@ export const selectBooksState= (state:State) => state.books;
 // }
 export const selectActiveBook=createSelector(
     selectBooksState,
-    (booksState) => fromBooks.selectActiveBook
+   fromBooks.selectActiveBook
 )
 
 export const selectAllBooks = createSelector(

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import {State,selectBooksEarningsTotals} from "src/app/shared/state";
+import {State,selectBooksEarningsTotals, selectAllBooks, selectActiveBook} from "src/app/shared/state";
 import {
   BookModel,
   calculateBooksGrossEarnings,
@@ -16,12 +16,18 @@ import { selectEarningsTotals } from "src/app/shared/state/books.reducer";
   styleUrls: ["./books-page.component.css"]
 })
 export class BooksPageComponent implements OnInit {
-  books: BookModel[] = [];
-  currentBook: BookModel | null = null;
+  // books: BookModel[] = [];
+  // currentBook: BookModel | null = null;
   // total: number = 0;
   total$:Observable<number>;
+  books$: Observable<BookModel[]>;
+  currentBook$: Observable<BookModel | undefined>;
+
+
   constructor(private booksService: BooksService,private store:Store<State>) {
     this.total$=store.select(selectBooksEarningsTotals);
+    this.books$=store.select(selectAllBooks);
+    this.currentBook$=store.select(selectActiveBook);
   }
 
   ngOnInit() {
@@ -34,14 +40,12 @@ export class BooksPageComponent implements OnInit {
   getBooks() {
     this.booksService.all().subscribe(books => {
       this.store.dispatch(BooksApiActions.booksLoaded({books}))
-      this.books = books;
     });
   }
 
 
   onSelect(book: BookModel) {
     this.store.dispatch(BooksPageActions.selectBook({bookId:book.id}))
-    this.currentBook = book;
   }
 
   onCancel() {
@@ -50,7 +54,6 @@ export class BooksPageComponent implements OnInit {
 
   removeSelectedBook() {
     this.store.dispatch(BooksPageActions.clearSelectedBook())
-    this.currentBook = null;
   }
 
   onSave(book: BookRequiredProps | BookModel) {

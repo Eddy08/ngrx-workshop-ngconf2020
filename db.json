@@ -8,15 +8,15 @@
     },
     {
       "id": "935e1881-735d-4712-a907-7aaf1438edc0",
-      "name": "new book",
-      "earnings": "3",
+      "name": "secondbook",
+      "earnings": "33",
       "description": null
     },
     {
-      "id": "a26cb0a5-0de1-40ca-8155-a7ac3b0db61c",
-      "name": "abc",
-      "earnings": "3999",
-      "description": "value"
+      "id": "eb7ccbee-31ce-4341-8329-d14fb037fc2e",
+      "name": "third Book",
+      "earnings": "3",
+      "description": "3"
     }
   ]
 }
